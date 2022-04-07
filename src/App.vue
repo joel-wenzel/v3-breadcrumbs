@@ -1,26 +1,36 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <v-app>
+    <v-main>
+      <v-toolbar>
+        <p>v-breadcrumbs:</p>
+        <v-breadcrumbs :items="crumbs"></v-breadcrumbs>
+
+        <p class="ml-10">Working links:</p>
+        <div class="d-flex ml-4" style="gap: 16px">
+          <router-link v-for="crumb in crumbs" :key="crumb.to" :to="crumb.to">{{ crumb.text }}</router-link>
+        </div>
+        <router-view></router-view>
+      </v-toolbar>
+    </v-main>
+  </v-app>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+const crumbs = [
+  {
+    text: 'Home',
+    to: '/',
+
+  },
+  {
+    text: '1st',
+    to: '/first',
+    link: true,
+  },
+  {
+    text: '2st',
+    to: '/second'
   }
-}
+]
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
